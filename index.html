@@ -107,15 +107,18 @@
                             </div>
                         </div>
 
-                        <!-- Аудиоплеер под ником -->
-                        <div class="mt-4 p-3 bg-zinc-950/70 border border-zinc-800 rounded-lg">
+                        <!-- Плеер под профилем -->
+                        <div class="mt-4 p-3 bg-zinc-950/70 border border-zinc-800/80 rounded-lg">
                             <div class="flex items-center justify-between mb-2">
-                                <div class="text-xs truncate pr-2">
-                                    <span id="track-title" class="text-purple-300 font-medium">Lil Peep & Lil Tracy - Giving Girls Cocaine (Sped up + Reverb)</span>
+                                <div class="text-[11px] truncate pr-2">
+                                    <span id="track-title" class="text-zinc-300 font-medium">facehateyou - uv1lmpvec5ki</span>
                                 </div>
-                                <button id="play-btn" class="px-3 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded text-xs font-bold transition">Play</button>
+                                <!-- Маленькая черная кнопка -->
+                                <button id="play-btn" class="px-2.5 py-0.5 bg-black hover:bg-zinc-900 text-zinc-300 hover:text-white border border-zinc-800 rounded text-[10px] font-semibold transition active:scale-95 shadow-sm flex items-center gap-1">
+                                    ▶ Play
+                                </button>
                             </div>
-                            <div class="flex items-center space-x-3">
+                            <div class="flex items-center space-x-2">
                                 <span class="text-[10px] text-zinc-500">Громкость:</span>
                                 <input type="range" id="volume-slider" min="0" max="100" value="70" class="w-full accent-purple-500 h-1 bg-zinc-800 rounded-lg appearance-none">
                             </div>
@@ -131,8 +134,8 @@
 
             </div>
 
-            <!-- Точный iframe с ремиксом shinex -->
-            <iframe id="sc-widget" class="hidden" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/shinex-music-622651793/lil-peep-lil-tracy-giving-girls-cocaine-sped-up-reverb-by-shinex&auto_play=false" allow="autoplay"></iframe>
+            <!-- SoundCloud iframe с нужным треком -->
+            <iframe id="sc-widget" class="hidden" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Ffacehateyou%2Fuv1lmpvec5ki&auto_play=false" allow="autoplay"></iframe>
 
             <section id="projects" class="space-y-6">
                 <div>
@@ -197,7 +200,7 @@
     </div>
 
     <script>
-        // Кастомный курсор
+        // Курсор
         const cursor = document.getElementById('custom-cursor');
         const follower = document.getElementById('custom-cursor-follower');
 
@@ -211,7 +214,7 @@
             }, 50);
         });
 
-        // Управление аудиоплеером SoundCloud
+        // Плеер SoundCloud
         const iframe = document.getElementById('sc-widget');
         const widget = SC.Widget(iframe);
         const playBtn = document.getElementById('play-btn');
@@ -226,20 +229,18 @@
         });
 
         widget.bind(SC.Widget.Events.PLAY, () => {
-            playBtn.textContent = 'Pause';
-            playBtn.classList.replace('bg-purple-600', 'bg-zinc-700');
+            playBtn.innerHTML = '❚❚ Pause';
         });
 
         widget.bind(SC.Widget.Events.PAUSE, () => {
-            playBtn.textContent = 'Play';
-            playBtn.classList.replace('bg-zinc-700', 'bg-purple-600');
+            playBtn.innerHTML = '▶ Play';
         });
 
         volumeSlider.addEventListener('input', (e) => {
             widget.setVolume(e.target.value);
         });
 
-        // Прелоадер и фон
+        // Анимация фона и прелоадер
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
