@@ -3,317 +3,263 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>alesha888</title>
+    <title>alesha888_</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://w.soundcloud.com/player/api.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #030712;
-            color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+            background-color: #08080a;
+            color: #e2e8f0;
             overflow-x: hidden;
-            user-select: none;
         }
-        * {
-            cursor: none !important;
+        
+        .card-dark {
+            background-color: #0d0e12;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
         }
-        /* Точный кастомный курсор */
-        #custom-cursor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 6px;
-            background-color: #e5e7eb;
+
+        .card-dark-header {
+            background-color: #121318;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Ползунок времени в плеере */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px rgba(229, 231, 235, 0.8);
+            background: #ffffff;
+            cursor: pointer;
         }
-        #custom-cursor-follower {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 28px;
-            height: 28px;
-            border: 1px solid rgba(156, 163, 175, 0.35);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            transition: transform 0.15s ease-out;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(1px);
-        }
-        .glass-card {
-            background: rgba(13, 17, 23, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-        .glass-card:hover {
-            border-color: rgba(168, 85, 247, 0.35);
-            box-shadow: 0 0 30px -5px rgba(168, 85, 247, 0.2);
-        }
+
         .glow-bg {
-            position: fixed;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, rgba(59, 130, 246, 0.06) 45%, rgba(0,0,0,0) 70%);
-            top: -250px;
+            position: absolute;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
-            z-index: -5;
+            width: 1000px;
+            height: 500px;
+            background: radial-gradient(ellipse at top, rgba(30, 40, 70, 0.25) 0%, rgba(8, 8, 10, 0) 70%);
             pointer-events: none;
-        }
-        .cursor-blink {
-            animation: blink 1s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        /* Сетка на фоне */
-        .grid-bg {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            z-index: 0;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-purple-500/30 selection:text-purple-200 grid-bg">
+<body class="min-h-screen relative flex flex-col items-center justify-start pb-20">
 
-    <div id="custom-cursor"></div>
-    <div id="custom-cursor-follower"></div>
     <div class="glow-bg"></div>
 
-    <canvas id="bg-canvas" class="fixed inset-0 -z-10 pointer-events-none opacity-40"></canvas>
-
     <!-- Входной экран (Click to enter) -->
-    <div id="enter-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-950/95 backdrop-blur-xl transition-opacity duration-700 cursor-pointer">
-        <div class="text-center space-y-3">
-            <h1 class="text-3xl font-extrabold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-violet-200 to-indigo-400 uppercase">alesha888</h1>
-            <p class="text-xs font-mono text-gray-400 tracking-widest uppercase animate-pulse">[ Click anywhere to enter ]</p>
-        </div>
+    <div id="enter-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#08080a] cursor-pointer transition-opacity duration-500">
+        <h1 class="text-2xl font-bold tracking-tight text-white mb-2">alesha888_</h1>
+        <p class="text-xs text-gray-500 font-mono tracking-wider">[ Click anywhere to enter ]</p>
     </div>
 
-    <!-- Прелоадер -->
-    <div id="loader" class="fixed inset-0 z-40 flex flex-col items-center justify-center bg-gray-950 transition-opacity duration-500">
-        <div class="relative flex items-center justify-center mb-4">
-            <div class="w-12 h-12 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin"></div>
-            <span class="absolute text-xs font-bold text-purple-400 font-mono">888</span>
+    <!-- Шапка (Header / Navbar) -->
+    <header class="w-full max-w-5xl px-6 py-8 flex justify-between items-center z-10">
+        <div class="font-extrabold text-xl tracking-tight text-white flex items-center gap-1">
+            alesha888<span class="text-blue-500">_</span>
         </div>
-        <p class="text-xs font-mono tracking-widest text-gray-400 uppercase">Loading profile...</p>
-    </div>
-
-    <!-- Навигационная панель -->
-    <header class="w-full max-w-4xl mx-auto px-6 pt-8 pb-4 flex justify-between items-center">
-        <div class="flex items-center space-x-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-purple-500 animate-pulse"></span>
-            <span class="font-bold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-purple-400">alesha888</span>
-        </div>
-        <nav class="flex space-x-6 text-xs font-medium text-gray-400">
-            <a href="#about" class="hover:text-white transition">Обо мне</a>
-            <a href="#stack" class="hover:text-white transition">Стек</a>
-            <a href="#contacts" class="hover:text-white transition">Контакты</a>
+        <nav class="flex space-x-8 text-xs font-medium text-gray-400">
+            <a href="#about" class="hover:text-white transition">Работы</a>
+            <a href="#projects" class="hover:text-white transition">Проекты</a>
+            <a href="#skills" class="hover:text-white transition">Скиллы</a>
+            <a href="#contact" class="hover:text-white transition">Контакт</a>
         </nav>
     </header>
 
-    <!-- Основной контент -->
-    <main class="w-full max-w-4xl mx-auto px-6 py-6 space-y-8 flex-grow" id="about">
+    <!-- Главный грид карточек (Блоки 1 в 1 как на скриншоте) -->
+    <main class="w-full max-w-5xl px-6 grid grid-cols-1 md:grid-cols-12 gap-5 z-10 mt-2">
         
-        <!-- Карточка профиля + Терминал -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- ЛЕВАЯ КОЛОНКА (Терминал + Музыкальный плеер) -->
+        <div class="md:col-span-7 flex flex-col gap-5">
             
-            <!-- Карточка карточка alesha888 -->
-            <div class="md:col-span-7 glass-card rounded-2xl p-6 flex flex-col justify-between space-y-6 transition duration-300">
-                
-                <div class="space-y-4">
-                    <div class="flex items-start space-x-4">
-                        <div class="relative">
-                            <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="alesha888" class="w-16 h-16 rounded-xl border border-purple-500/30 object-cover shadow-lg">
-                            <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-gray-950 rounded-full" title="Online"></span>
-                        </div>
-                        <div>
-                            <div class="flex items-center space-x-2">
-                                <h1 class="text-xl font-bold text-white tracking-tight">alesha888</h1>
-                                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-semibold">DEV</span>
-                            </div>
-                            <p class="text-xs text-purple-400 font-mono mt-0.5">DS: trosik1</p>
-                            
-                            <!-- Тэги ролей -->
-                            <div class="flex flex-wrap gap-1.5 mt-2.5">
-                                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-gray-900/80 text-gray-300 border border-gray-800">Developer</span>
-                                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-purple-950/40 text-purple-300 border border-purple-800/50">Game Servers</span>
-                                <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-indigo-950/40 text-indigo-300 border border-indigo-800/50">Node.js / MySQL</span>
-                            </div>
-                        </div>
+            <!-- Блок 1: JSON Терминал профиля -->
+            <div class="card-dark overflow-hidden flex flex-col h-[230px]">
+                <div class="card-dark-header px-4 py-2.5 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
                     </div>
-
-                    <p class="text-xs text-gray-300 leading-relaxed font-normal pt-1">
-                        Разработчик игровых серверов и скриптов (RAGE MP, Node.js, MySQL). Настройка баз данных, администрирование и кастомные решения.
-                    </p>
+                    <span class="text-xs font-mono text-gray-500">~/portfolio/profile.json</span>
                 </div>
-
-                <!-- SoundCloud Музыкальный Плеер -->
-                <div class="p-3 rounded-xl bg-gray-950/80 border border-gray-800/80 flex items-center justify-between space-x-3 shadow-inner">
-                    <div class="flex items-center space-x-3 overflow-hidden">
-                        <div class="w-8 h-8 rounded-lg bg-purple-950/50 border border-purple-500/30 flex items-center justify-center shrink-0">
-                            <svg class="w-4 h-4 text-purple-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-                        </div>
-                        <div class="truncate">
-                            <p class="text-[11px] font-medium text-gray-200 truncate" id="track-title">facehateyou - uv1lmpvec5ki</p>
-                            <p class="text-[10px] text-gray-500 font-mono">SoundCloud Track</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center space-x-3 shrink-0">
-                        <input type="range" id="volume-slider" min="0" max="100" value="70" class="w-16 accent-purple-500 h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer hidden sm:block">
-                        <!-- Черная круглая кнопка Play / Pause без белого -->
-                        <button id="play-btn" class="w-7 h-7 rounded-full bg-gray-950 hover:bg-black text-gray-300 hover:text-white border border-gray-800 flex items-center justify-center transition active:scale-95 text-[10px] shadow-sm">
-                            ▶
-                        </button>
-                    </div>
+                <div class="p-4 font-mono text-xs text-gray-400 space-y-1 overflow-y-auto">
+                    <p><span class="text-gray-600">1</span>  {</p>
+                    <p><span class="text-gray-600">2</span>    <span class="text-blue-400">"name"</span>: <span class="text-emerald-400">"alesha888"</span>,</p>
+                    <p><span class="text-gray-600">3</span>    <span class="text-blue-400">"role"</span>: <span class="text-emerald-400">"Game Developer & Server Admin"</span>,</p>
+                    <p><span class="text-gray-600">4</span>    <span class="text-blue-400">"skills"</span>: [<span class="text-emerald-400">"RAGE MP"</span>, <span class="text-emerald-400">"JavaScript"</span>, <span class="text-emerald-400">"Node.js"</span>, <span class="text-emerald-400">"MySQL"</span>],</p>
+                    <p><span class="text-gray-600">5</span>    <span class="text-blue-400">"status"</span>: <span class="text-emerald-400">"Ready to build"</span></p>
+                    <p><span class="text-gray-600">6</span>  }</p>
                 </div>
             </div>
 
-            <!-- Терминал -->
-            <div class="md:col-span-5 glass-card rounded-2xl p-5 font-mono text-xs flex flex-col justify-between transition duration-300">
-                <div>
-                    <div class="flex items-center justify-between pb-3 mb-3 border-b border-gray-800/80">
-                        <div class="flex space-x-1.5">
-                            <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
-                        </div>
-                        <span class="text-[10px] text-gray-500">bash — alesha888</span>
+            <!-- Блок 2: Плеер музыки -->
+            <div class="card-dark p-5 flex flex-col justify-between h-[210px]">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-lg font-bold text-white tracking-wide" id="track-name">uv1lmpvec5ki</h3>
+                        <p class="text-xs text-gray-500 font-medium mt-0.5" id="track-artist">facehateyou</p>
                     </div>
-
-                    <div class="space-y-1.5 text-gray-300">
-                        <p class="text-gray-500">$ info --user</p>
-                        <p><span class="text-purple-400">username:</span> alesha888</p>
-                        <p><span class="text-purple-400">discord:</span> trosik1</p>
-                        <p><span class="text-purple-400">role:</span> Game & Web Dev</p>
-                        <p><span class="text-purple-400">stack:</span> JS / Node / MySQL</p>
-                        <p><span class="text-purple-400">status:</span> online & ready</p>
+                    <div class="flex items-center space-x-1.5 text-xs text-gray-400 bg-white/5 px-2.5 py-1 rounded-full border border-white/5">
+                        <i data-lucide="heart" class="w-3.5 h-3.5 text-gray-400"></i>
+                        <span>6</span>
                     </div>
                 </div>
 
-                <div class="pt-3 border-t border-gray-800/80 text-[11px] text-gray-500 flex items-center">
-                    <span>> system loaded</span>
-                    <span class="inline-block w-1.5 h-3 bg-purple-400 ml-1.5 cursor-blink"></span>
+                <!-- Прогресс трека -->
+                <div class="space-y-1.5">
+                    <input type="range" id="seek-slider" max="100" value="0" class="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-white">
+                    <div class="flex justify-between text-[11px] font-mono text-gray-500">
+                        <span id="curr-time">0:00</span>
+                        <span id="dur-time">0:00</span>
+                    </div>
+                </div>
+
+                <!-- Управление плеером (Точно как на фото) -->
+                <div class="flex items-center justify-between pt-1">
+                    <div class="flex items-center space-x-2 text-gray-400">
+                        <i data-lucide="volume-2" class="w-4 h-4"></i>
+                        <input type="range" id="volume-slider" min="0" max="100" value="70" class="w-16 h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-white">
+                    </div>
+
+                    <div class="flex items-center space-x-4 text-gray-300">
+                        <button class="hover:text-white transition"><i data-lucide="shuffle" class="w-4 h-4"></i></button>
+                        <button class="hover:text-white transition"><i data-lucide="skip-back" class="w-4 h-4"></i></button>
+                        
+                        <!-- Центральная круглая кнопка Play/Pause -->
+                        <button id="play-btn" class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-105 transition active:scale-95">
+                            <i data-lucide="pause" class="w-5 h-5 fill-black" id="play-icon"></i>
+                        </button>
+                        
+                        <button class="hover:text-white transition"><i data-lucide="skip-forward" class="w-4 h-4"></i></button>
+                        <button class="hover:text-white transition"><i data-lucide="repeat" class="w-4 h-4"></i></button>
+                    </div>
+
+                    <div class="w-20"></div> <!-- Заглушка для баланса центрирования -->
                 </div>
             </div>
 
         </div>
 
-        <!-- Стек технологий -->
-        <section id="stack" class="space-y-3">
-            <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider font-mono">Tech Stack & Tools</h2>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div class="glass-card p-3.5 rounded-xl flex items-center space-x-3 transition">
-                    <span class="text-amber-400 text-sm font-bold font-mono">JS</span>
-                    <span class="text-xs font-medium text-gray-300">JavaScript</span>
+        <!-- ПРАВАЯ КОЛОНКА (Профиль + Активность) -->
+        <div class="md:col-span-5 flex flex-col gap-5">
+            
+            <!-- Блок 3: Карточка профиля с аватаркой, тегами и соцсетями -->
+            <div class="card-dark p-6 flex flex-col justify-between h-[310px] relative overflow-hidden">
+                <!-- Шапка карточки профиля -->
+                <div>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="relative">
+                            <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" class="w-16 h-16 rounded-full object-cover border-2 border-white/10">
+                            <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-[#0d0e12] rounded-full"></span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-white tracking-tight">alesha888</h2>
+                    <p class="text-xs text-gray-400 font-medium mt-0.5">Game Developer & RAGE MP Specialist</p>
+
+                    <!-- Плашки ролей -->
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-gray-300 flex items-center gap-1.5">
+                            <i data-lucide="code-2" class="w-3.5 h-3.5 text-gray-400"></i> Разработчик
+                        </span>
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-gray-300 flex items-center gap-1.5">
+                            <i data-lucide="database" class="w-3.5 h-3.5 text-gray-400"></i> MySQL / Node
+                        </span>
+                        <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-gray-300 flex items-center gap-1.5">
+                            <i data-lucide="eye" class="w-3.5 h-3.5 text-gray-400"></i> 888
+                        </span>
+                    </div>
                 </div>
-                <div class="glass-card p-3.5 rounded-xl flex items-center space-x-3 transition">
-                    <span class="text-emerald-400 text-sm font-bold font-mono">NODE</span>
-                    <span class="text-xs font-medium text-gray-300">Node.js</span>
-                </div>
-                <div class="glass-card p-3.5 rounded-xl flex items-center space-x-3 transition">
-                    <span class="text-blue-400 text-sm font-bold font-mono">SQL</span>
-                    <span class="text-xs font-medium text-gray-300">MySQL / DB</span>
-                </div>
-                <div class="glass-card p-3.5 rounded-xl flex items-center space-x-3 transition">
-                    <span class="text-purple-400 text-sm font-bold font-mono">RAGE</span>
-                    <span class="text-xs font-medium text-gray-300">RAGE MP API</span>
+
+                <!-- Кнопки Соцсетей (ВАШИ ССЫЛКИ И НИКИ) -->
+                <div class="space-y-2 mt-4">
+                    <div class="grid grid-cols-2 gap-2">
+                        <!-- Discord -->
+                        <a href="https://discord.com/users/trosik1" target="_blank" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-white text-black hover:bg-gray-200 transition font-medium text-xs shadow">
+                            <i data-lucide="disc" class="w-4 h-4"></i>
+                            <span>trosik1</span>
+                        </a>
+                        <!-- Telegram -->
+                        <a href="https://t.me/alesha8881" target="_blank" class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 text-white transition font-medium text-xs">
+                            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                            <span>@alesha8881</span>
+                        </a>
+                    </div>
+                    <!-- GitHub -->
+                    <a href="https://github.com/alesha888" target="_blank" class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 text-gray-300 hover:text-white transition font-medium text-xs">
+                        <i data-lucide="github" class="w-3.5 h-3.5"></i>
+                        <span>alesha888</span>
+                    </a>
                 </div>
             </div>
-        </section>
 
-        <!-- Контакты / Соцсети -->
-        <section id="contacts" class="space-y-3">
-            <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider font-mono">Connect With Me</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <a href="https://discord.com/users/trosik1" target="_blank" class="glass-card p-4 rounded-xl flex items-center justify-between group transition">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold text-xs">
-                            DS
-                        </div>
-                        <div>
-                            <p class="text-xs font-semibold text-gray-200 group-hover:text-purple-400 transition">Discord</p>
-                            <p class="text-[10px] text-gray-500 font-mono">trosik1</p>
-                        </div>
+            <!-- Блок 4: Статус Активность -->
+            <div class="card-dark p-5 h-[130px] flex flex-col justify-between">
+                <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest font-mono">АКТИВНОСТЬ</span>
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-gray-400">
+                        <i data-lucide="terminal" class="w-4 h-4"></i>
                     </div>
-                    <span class="text-gray-600 group-hover:text-gray-300 transition text-xs">↗</span>
-                </a>
-
-                <a href="https://t.me/alesha8881" target="_blank" class="glass-card p-4 rounded-xl flex items-center justify-between group transition">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 font-bold text-xs">
-                            TG
-                        </div>
-                        <div>
-                            <p class="text-xs font-semibold text-gray-200 group-hover:text-purple-400 transition">Telegram</p>
-                            <p class="text-[10px] text-gray-500 font-mono">@alesha8881</p>
-                        </div>
+                    <div>
+                        <p class="text-sm font-semibold text-white">Офлайн</p>
+                        <p class="text-xs text-gray-500">Нет активных процессов</p>
                     </div>
-                    <span class="text-gray-600 group-hover:text-gray-300 transition text-xs">↗</span>
-                </a>
-
-                <a href="https://github.com/alesha888" target="_blank" class="glass-card p-4 rounded-xl flex items-center justify-between group transition">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded-lg bg-gray-500/10 border border-gray-500/20 flex items-center justify-center text-gray-300 font-bold text-xs">
-                            GH
-                        </div>
-                        <div>
-                            <p class="text-xs font-semibold text-gray-200 group-hover:text-purple-400 transition">GitHub</p>
-                            <p class="text-[10px] text-gray-500 font-mono">alesha888</p>
-                        </div>
-                    </div>
-                    <span class="text-gray-600 group-hover:text-gray-300 transition text-xs">↗</span>
-                </a>
+                </div>
             </div>
-        </section>
+
+        </div>
 
     </main>
 
-    <!-- SoundCloud iframe с автоплеем -->
+    <!-- SoundCloud iframe в фоне -->
     <iframe id="sc-widget" class="hidden" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Ffacehateyou%2Fuv1lmpvec5ki&auto_play=true" allow="autoplay"></iframe>
 
-    <footer class="w-full max-w-4xl mx-auto px-6 py-6 border-t border-gray-900/80 text-center text-xs text-gray-600 font-mono">
-        © 2026 alesha888. All rights reserved.
-    </footer>
-
     <script>
-        // Курсор
-        const cursor = document.getElementById('custom-cursor');
-        const follower = document.getElementById('custom-cursor-follower');
+        // Инициализация иконок Lucide
+        lucide.createIcons();
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                follower.style.left = e.clientX + 'px';
-                follower.style.top = e.clientY + 'px';
-            }, 40);
-        });
-
-        // SoundCloud Аудио
+        // SoundCloud Аудио Плеер
         const iframe = document.getElementById('sc-widget');
         const widget = SC.Widget(iframe);
         const playBtn = document.getElementById('play-btn');
+        const playIcon = document.getElementById('play-icon');
         const volumeSlider = document.getElementById('volume-slider');
+        const seekSlider = document.getElementById('seek-slider');
+        const currTimeText = document.getElementById('curr-time');
+        const durTimeText = document.getElementById('dur-time');
+
         let isPlaying = false;
+
+        function formatTime(ms) {
+            const totalSec = Math.floor(ms / 1000);
+            const min = Math.floor(totalSec / 60);
+            const sec = totalSec % 60;
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
 
         widget.bind(SC.Widget.Events.READY, () => {
             widget.setVolume(70);
+            
+            widget.getDuration((dur) => {
+                durTimeText.innerText = formatTime(dur);
+            });
+        });
+
+        widget.bind(SC.Widget.Events.PLAY_PROGRESS, (data) => {
+            const current = data.currentPosition;
+            const duration = data.relativePosition * 100;
+            seekSlider.value = duration;
+            currTimeText.innerText = formatTime(current);
         });
 
         playBtn.addEventListener('click', (e) => {
@@ -323,71 +269,27 @@
 
         widget.bind(SC.Widget.Events.PLAY, () => {
             isPlaying = true;
-            playBtn.innerHTML = '❚❚';
+            playIcon.setAttribute('data-lucide', 'pause');
+            lucide.createIcons();
         });
 
         widget.bind(SC.Widget.Events.PAUSE, () => {
             isPlaying = false;
-            playBtn.innerHTML = '▶';
+            playIcon.setAttribute('data-lucide', 'play');
+            lucide.createIcons();
         });
 
         volumeSlider.addEventListener('input', (e) => {
             widget.setVolume(e.target.value);
         });
 
-        // Входной экран "Click to enter"
+        // Вход на сайт по клику
         const enterScreen = document.getElementById('enter-screen');
         enterScreen.addEventListener('click', () => {
             enterScreen.style.opacity = '0';
-            setTimeout(() => {
-                enterScreen.style.display = 'none';
-            }, 700);
-            
+            setTimeout(() => enterScreen.style.display = 'none', 500);
             widget.play();
         });
-
-        // Прелоадер
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 500);
-            }, 600);
-        });
-
-        // Анимированный фон с частицами
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        const particles = Array.from({ length: 40 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 1.5 + 0.5,
-            speedY: Math.random() * 0.3 + 0.1
-        }));
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(168, 85, 247, 0.4)';
-            
-            particles.forEach(p => {
-                p.y -= p.speedY;
-                if (p.y < 0) p.y = canvas.height;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            
-            requestAnimationFrame(animate);
-        }
-        animate();
     </script>
 </body>
 </html>
