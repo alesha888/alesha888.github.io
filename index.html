@@ -111,7 +111,7 @@
                         <div class="mt-4 p-3 bg-zinc-950/70 border border-zinc-800 rounded-lg">
                             <div class="flex items-center justify-between mb-2">
                                 <div class="text-xs truncate pr-2">
-                                    <span id="track-title" class="text-purple-300 font-medium">Lil Peep & Lil Tracy - Giving Girls Cocaine</span>
+                                    <span id="track-title" class="text-purple-300 font-medium">Lil Peep & Lil Tracy - Giving Girls Cocaine (Sped up + Reverb)</span>
                                 </div>
                                 <button id="play-btn" class="px-3 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded text-xs font-bold transition">Play</button>
                             </div>
@@ -131,8 +131,8 @@
 
             </div>
 
-            <!-- Скрытый фрейм SoundCloud для работы плеер-API -->
-            <iframe id="sc-widget" class="hidden" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1149953833&auto_play=false" allow="autoplay"></iframe>
+            <!-- Точный iframe с ремиксом shinex -->
+            <iframe id="sc-widget" class="hidden" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/shinex-music-622651793/lil-peep-lil-tracy-giving-girls-cocaine-sped-up-reverb-by-shinex&auto_play=false" allow="autoplay"></iframe>
 
             <section id="projects" class="space-y-6">
                 <div>
@@ -216,7 +216,6 @@
         const widget = SC.Widget(iframe);
         const playBtn = document.getElementById('play-btn');
         const volumeSlider = document.getElementById('volume-slider');
-        let isPlaying = false;
 
         widget.bind(SC.Widget.Events.READY, () => {
             widget.setVolume(70);
@@ -227,13 +226,11 @@
         });
 
         widget.bind(SC.Widget.Events.PLAY, () => {
-            isPlaying = true;
             playBtn.textContent = 'Pause';
             playBtn.classList.replace('bg-purple-600', 'bg-zinc-700');
         });
 
         widget.bind(SC.Widget.Events.PAUSE, () => {
-            isPlaying = false;
             playBtn.textContent = 'Play';
             playBtn.classList.replace('bg-zinc-700', 'bg-purple-600');
         });
