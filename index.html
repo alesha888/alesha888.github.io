@@ -107,13 +107,11 @@
                             </div>
                         </div>
 
-                        <!-- Плеер под профилем -->
                         <div class="mt-4 p-3 bg-zinc-950/70 border border-zinc-800/80 rounded-lg">
                             <div class="flex items-center justify-between mb-2">
                                 <div class="text-[11px] truncate pr-2">
                                     <span id="track-title" class="text-zinc-300 font-medium">facehateyou - uv1lmpvec5ki</span>
                                 </div>
-                                <!-- Маленькая черная кнопка -->
                                 <button id="play-btn" class="px-2.5 py-0.5 bg-black hover:bg-zinc-900 text-zinc-300 hover:text-white border border-zinc-800 rounded text-[10px] font-semibold transition active:scale-95 shadow-sm flex items-center gap-1">
                                     ▶ Play
                                 </button>
@@ -134,7 +132,6 @@
 
             </div>
 
-            <!-- SoundCloud iframe с нужным треком -->
             <iframe id="sc-widget" class="hidden" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Ffacehateyou%2Fuv1lmpvec5ki&auto_play=false" allow="autoplay"></iframe>
 
             <section id="projects" class="space-y-6">
@@ -200,7 +197,6 @@
     </div>
 
     <script>
-        // Курсор
         const cursor = document.getElementById('custom-cursor');
         const follower = document.getElementById('custom-cursor-follower');
 
@@ -214,7 +210,6 @@
             }, 50);
         });
 
-        // Плеер SoundCloud
         const iframe = document.getElementById('sc-widget');
         const widget = SC.Widget(iframe);
         const playBtn = document.getElementById('play-btn');
@@ -240,7 +235,6 @@
             widget.setVolume(e.target.value);
         });
 
-        // Анимация фона и прелоадер
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
