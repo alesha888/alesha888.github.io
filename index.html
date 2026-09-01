@@ -114,9 +114,9 @@
                                 <div class="text-[11px] truncate pr-2">
                                     <span id="track-title" class="text-zinc-300 font-medium">facehateyou - uv1lmpvec5ki</span>
                                 </div>
-                                <!-- Очень маленькая черная кнопка -->
-                                <button id="play-btn" class="px-2 py-0.5 bg-black hover:bg-zinc-900 text-zinc-300 hover:text-white border border-zinc-800 rounded text-[9px] font-medium transition active:scale-95 shadow-sm flex items-center leading-none">
-                                    ▶ Play
+                                <!-- Маленькая черная круглая кнопка без белого фона -->
+                                <button id="play-btn" class="w-6 h-6 rounded-full bg-zinc-900 hover:bg-black text-zinc-300 hover:text-white border border-zinc-700/80 flex items-center justify-center transition active:scale-95 shadow-md text-[10px]">
+                                    ▶
                                 </button>
                             </div>
                             <div class="flex items-center space-x-2">
@@ -135,7 +135,8 @@
 
             </div>
 
-            <iframe id="sc-widget" class="hidden" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Ffacehateyou%2Fuv1lmpvec5ki&auto_play=false" allow="autoplay"></iframe>
+            <!-- SoundCloud iframe с автоплеем -->
+            <iframe id="sc-widget" class="hidden" src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Ffacehateyou%2Fuv1lmpvec5ki&auto_play=true" allow="autoplay"></iframe>
 
             <section id="projects" class="space-y-6">
                 <div>
@@ -217,26 +218,40 @@
         const widget = SC.Widget(iframe);
         const playBtn = document.getElementById('play-btn');
         const volumeSlider = document.getElementById('volume-slider');
+        let isPlaying = false;
 
         widget.bind(SC.Widget.Events.READY, () => {
             widget.setVolume(70);
+            widget.play();
         });
 
-        playBtn.addEventListener('click', () => {
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
             widget.toggle();
         });
 
         widget.bind(SC.Widget.Events.PLAY, () => {
-            playBtn.innerHTML = '❚❚ Pause';
+            isPlaying = true;
+            playBtn.innerHTML = '❚❚';
         });
 
         widget.bind(SC.Widget.Events.PAUSE, () => {
-            playBtn.innerHTML = '▶ Play';
+            isPlaying = false;
+            playBtn.innerHTML = '▶';
         });
 
         volumeSlider.addEventListener('input', (e) => {
             widget.setVolume(e.target.value);
         });
+
+        // Запуск плеера по первому клику, если браузер заблокировал автоматический звук
+        const startAudioOnInteraction = () => {
+            if (!isPlaying) {
+                widget.play();
+            }
+            document.removeEventListener('click', startAudioOnInteraction);
+        };
+        document.addEventListener('click', startAudioOnInteraction);
 
         window.addEventListener('load', () => {
             setTimeout(() => {
