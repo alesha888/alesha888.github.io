@@ -10,27 +10,28 @@
         * {
             cursor: none !important;
         }
+        /* Серый кастомный курсор */
         #custom-cursor {
             position: fixed;
             top: 0;
             left: 0;
-            width: 8px;
-            height: 8px;
-            background-color: #a855f7;
+            width: 6px;
+            height: 6px;
+            background-color: #d4d4d8;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7;
+            box-shadow: 0 0 8px #a1a1aa, 0 0 15px #71717a;
             transition: transform 0.15s ease-out;
         }
         #custom-cursor-follower {
             position: fixed;
             top: 0;
             left: 0;
-            width: 28px;
-            height: 28px;
-            border: 1px solid rgba(168, 85, 247, 0.5);
+            width: 24px;
+            height: 24px;
+            border: 1px solid rgba(161, 161, 170, 0.4);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
@@ -107,12 +108,14 @@
                             </div>
                         </div>
 
+                        <!-- Плеер под профилем -->
                         <div class="mt-4 p-3 bg-zinc-950/70 border border-zinc-800/80 rounded-lg">
                             <div class="flex items-center justify-between mb-2">
                                 <div class="text-[11px] truncate pr-2">
                                     <span id="track-title" class="text-zinc-300 font-medium">facehateyou - uv1lmpvec5ki</span>
                                 </div>
-                                <button id="play-btn" class="px-2.5 py-0.5 bg-black hover:bg-zinc-900 text-zinc-300 hover:text-white border border-zinc-800 rounded text-[10px] font-semibold transition active:scale-95 shadow-sm flex items-center gap-1">
+                                <!-- Очень маленькая черная кнопка -->
+                                <button id="play-btn" class="px-2 py-0.5 bg-black hover:bg-zinc-900 text-zinc-300 hover:text-white border border-zinc-800 rounded text-[9px] font-medium transition active:scale-95 shadow-sm flex items-center leading-none">
                                     ▶ Play
                                 </button>
                             </div>
