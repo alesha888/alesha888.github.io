@@ -34,7 +34,7 @@
             padding: 40px 20px;
         }
 
-        /* Экран входа [ click to enter ] */
+        /* Экран входа */
         #entry-screen {
             position: fixed;
             top: 0;
@@ -69,15 +69,14 @@
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 40px;
         }
 
-        /* Шапка сайта */
+        /* Шапка */
         .site-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
         }
 
         .logo {
@@ -312,7 +311,7 @@
             height: 16px;
         }
 
-        /* Карточка профиля справа */
+        /* Правая карточка */
         .profile-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -324,11 +323,12 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .avatar-img {
+        /* Полностью черная аватарка */
+        .avatar-black {
             width: 84px;
             height: 84px;
             border-radius: 50%;
-            object-fit: cover;
+            background-color: #000000;
             border: 2px solid var(--border-color);
         }
 
@@ -391,6 +391,138 @@
             border-color: #ffffff;
         }
 
+        /* Секция проектов */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .project-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .project-info h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .project-info p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(56, 237, 248, 0.1);
+            color: #38edf8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        /* Секция скиллов */
+        .skills-section {
+            text-align: center;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .skills-pills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .skill-pill {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        /* Секция статистики */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 28px 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         #sc-iframe {
             display: none;
         }
@@ -407,9 +539,9 @@
         <div class="site-header">
             <div class="logo">alesha_dev_</div>
             <div class="nav-links">
-                <a href="#">Работы</a>
-                <a href="#">Проекты</a>
-                <a href="#">Скиллы</a>
+                <a href="#projects">Работы</a>
+                <a href="#projects">Проекты</a>
+                <a href="#skills">Скиллы</a>
                 <a href="https://t.me/alesha8881" target="_blank">Контакт</a>
             </div>
         </div>
@@ -479,7 +611,7 @@
             </div>
 
             <div class="profile-card">
-                <img src="avatar.jpg" alt="alesha" class="avatar-img">
+                <div class="avatar-black"></div>
                 
                 <div class="profile-title">
                     <h1>alesha</h1>
@@ -505,6 +637,78 @@
                 </div>
             </div>
 
+        </div>
+
+        <div id="projects">
+            <h2 class="section-title">Open Source & Projects</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <div class="project-icon">📦</div>
+                    <div class="project-info">
+                        <h3>StacyPilot Remake</h3>
+                        <p>Interactive UI module. System refactoring and optimization.</p>
+                        <span class="tag">Luau</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">🗄</div>
+                    <div class="project-info">
+                        <h3>RAGE MP Framework</h3>
+                        <p>Server infrastructure, synchronization, and project landing.</p>
+                        <span class="tag">Node.js / Vue</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">🎛</div>
+                    <div class="project-info">
+                        <h3>Audio EQ Tool</h3>
+                        <p>Graphical microphone equalizer with virtual drivers.</p>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">🖼</div>
+                    <div class="project-info">
+                        <h3>GIF Sprite Decoder</h3>
+                        <p>Local utility (SPA) for storyboarding animations into sprite sheets.</p>
+                        <span class="tag">HTML / JS</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="skills-section" id="skills">
+            <span class="section-label">STACK</span>
+            <h2 class="section-title">Скиллы и технологии</h2>
+            <div class="skills-pills">
+                <div class="skill-pill">JavaScript / TypeScript</div>
+                <div class="skill-pill">Python</div>
+                <div class="skill-pill">Luau</div>
+                <div class="skill-pill">RAGE MP API</div>
+                <div class="skill-pill">Node.js</div>
+                <div class="skill-pill">UI/UX Design</div>
+                <div class="skill-pill">HTML / CSS</div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">4+</div>
+                <div class="stat-label">Года опыта</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">Проектов</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">На связи</div>
+            </div>
         </div>
 
     </div>
