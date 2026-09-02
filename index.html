@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://w.soundcloud.com/player/api.js"></script>
     <style>
         :root {
             --bg-color: #08080a;
@@ -77,7 +78,7 @@
             letter-spacing: -0.5px;
         }
 
-        /* Окно терминала */
+        /* Терминал */
         .terminal-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -154,11 +155,173 @@
             transform: translateY(-2px);
         }
 
-        .music-wrapper {
-            margin-top: 10px;
-            border-radius: 12px;
-            overflow: hidden;
+        /* Кастомный плеер */
+        .custom-player {
+            background: var(--card-bg);
             border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .player-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .track-info h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .track-info p {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .like-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .like-btn:hover {
+            color: #ff3344;
+        }
+
+        /* Прогресс-бар */
+        .progress-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: #fff;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .progress-thumb {
+            position: absolute;
+            right: -6px;
+            top: -4px;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(255,255,255,0.8);
+        }
+
+        .time-stamps {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Панель управления */
+        .controls-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 4px;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 120px;
+        }
+
+        .volume-icon {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .volume-slider {
+            width: 100%;
+            height: 3px;
+            accent-color: #fff;
+            cursor: pointer;
+        }
+
+        .main-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .icon-btn:hover {
+            opacity: 1;
+        }
+
+        .play-btn {
+            width: 48px;
+            height: 48px;
+            background: #fff;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .play-btn svg {
+            fill: #000;
+            width: 18px;
+            height: 18px;
+            margin-left: 2px;
+        }
+
+        /* Скрытый iFrame SoundCloud для работы аудио */
+        #sc-iframe {
+            display: none;
         }
     </style>
 </head>
@@ -173,6 +336,7 @@
     <div id="main-content">
         <div class="header">alesha888</div>
 
+        <!-- Терминал -->
         <div class="terminal-card">
             <div class="terminal-header">
                 <div class="dots">
@@ -191,28 +355,137 @@
             </div>
         </div>
 
+        <!-- Кнопки соцсетей -->
         <div class="socials">
             <a href="https://t.me/alesha8881" target="_blank" class="social-btn">Telegram</a>
             <a href="https://discord.com/users/trosik1" target="_blank" class="social-btn">Discord</a>
             <a href="https://www.youtube.com/@code6111" target="_blank" class="social-btn">YouTube</a>
         </div>
 
-        <div class="music-wrapper" id="player-container">
-            <!-- Сюда подгрузится плеер при клике -->
+        <!-- Кастомный музыкальный плеер -->
+        <div class="custom-player">
+            <div class="player-top">
+                <div class="track-info">
+                    <h2>888</h2>
+                    <p>huzzy b</p>
+                </div>
+                <div class="like-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <span>6</span>
+                </div>
+            </div>
+
+            <!-- Шкала времени -->
+            <div class="progress-container">
+                <div class="progress-bar-bg" id="progress-bg">
+                    <div class="progress-bar-fill" id="progress-fill">
+                        <div class="progress-thumb"></div>
+                    </div>
+                </div>
+                <div class="time-stamps">
+                    <span id="curr-time">0:00</span>
+                    <span id="dur-time">1:46</span>
+                </div>
+            </div>
+
+            <!-- Управление -->
+            <div class="controls-container">
+                <div class="volume-control">
+                    <span class="volume-icon">🔊</span>
+                    <input type="range" class="volume-slider" id="volume" min="0" max="100" value="100">
+                </div>
+
+                <div class="main-controls">
+                    <button class="icon-btn">🔀</button>
+                    <button class="icon-btn">⏮</button>
+                    <button class="play-btn" id="play-toggle">
+                        <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <button class="icon-btn">⏭</button>
+                    <button class="icon-btn">🔁</button>
+                </div>
+            </div>
         </div>
+
     </div>
 
+    <!-- Скрытый SoundCloud плеер -->
+    <iframe id="sc-iframe" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/royalxvii/slezy-satoshi"></iframe>
+
     <script>
+        const iframe = document.getElementById('sc-iframe');
+        const widget = SC.Widget(iframe);
+        
+        let isPlaying = false;
+
+        const playBtn = document.getElementById('play-toggle');
+        const playIcon = document.getElementById('play-icon');
+        const currTimeEl = document.getElementById('curr-time');
+        const durTimeEl = document.getElementById('dur-time');
+        const progressFill = document.getElementById('progress-fill');
+        const progressBg = document.getElementById('progress-bg');
+        const volumeSlider = document.getElementById('volume');
+
+        function formatTime(ms) {
+            const totalSec = Math.floor(ms / 1000);
+            const min = Math.floor(totalSec / 60);
+            const sec = totalSec % 60;
+            return min + ':' + (sec < 10 ? '0' : '') + sec;
+        }
+
         function enterSite() {
             var screen = document.getElementById('entry-screen');
             screen.style.opacity = '0';
-            setTimeout(function() {
-                screen.style.display = 'none';
-            }, 500);
+            setTimeout(() => { screen.style.display = 'none'; }, 500);
 
-            // Вставляем плеер с включенным автозапуском
-            var container = document.getElementById('player-container');
-            container.innerHTML = '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/royalxvii/slezy-satoshi&color=%23ff3344&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>';
+            widget.play();
+            isPlaying = true;
+            updatePlayIcon();
+        }
+
+        playBtn.addEventListener('click', () => {
+            widget.toggle();
+        });
+
+        widget.bind(SC.Widget.Events.PLAY, () => {
+            isPlaying = true;
+            updatePlayIcon();
+        });
+
+        widget.bind(SC.Widget.Events.PAUSE, () => {
+            isPlaying = false;
+            updatePlayIcon();
+        });
+
+        widget.bind(SC.Widget.Events.PLAY_PROGRESS, (data) => {
+            currTimeEl.innerText = formatTime(data.currentPosition);
+            widget.getDuration((duration) => {
+                durTimeEl.innerText = formatTime(duration);
+                const pct = (data.currentPosition / duration) * 100;
+                progressFill.style.width = pct + '%';
+            });
+        });
+
+        progressBg.addEventListener('click', (e) => {
+            const rect = progressBg.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            widget.getDuration((duration) => {
+                const seekTo = (clickX / width) * duration;
+                widget.seekTo(seekTo);
+            });
+        });
+
+        volumeSlider.addEventListener('input', (e) => {
+            widget.setVolume(e.target.value);
+        });
+
+        function updatePlayIcon() {
+            if (isPlaying) {
+                playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+            } else {
+                playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            }
         }
     </script>
 </body>
