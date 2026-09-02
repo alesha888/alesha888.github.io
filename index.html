@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>alesha888 — Developer Portfolio</title>
+    <title>alesha888 — Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://w.soundcloud.com/player/api.js"></script>
     <style>
         :root {
             --bg-color: #08080a;
@@ -38,15 +37,15 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
+            width: 100%;
             height: 100vh;
             background-color: #050505;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 99999;
             cursor: pointer;
-            transition: opacity 0.8s ease, visibility 0.8s;
+            transition: opacity 0.5s ease, visibility 0.5s;
         }
 
         .enter-text {
@@ -64,8 +63,6 @@
 
         /* Основной контент */
         #main-content {
-            opacity: 0;
-            transition: opacity 1s ease;
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
@@ -74,14 +71,13 @@
             gap: 30px;
         }
 
-        /* Шапка с логотипом */
         .header {
             font-size: 1.8rem;
             font-weight: 800;
             letter-spacing: -0.5px;
         }
 
-        /* Окно терминала (как на скриншоте) */
+        /* Окно терминала */
         .terminal-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -122,4 +118,103 @@
 
         .terminal-body {
             padding: 24px;
-            font-family:
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #4af626;
+        }
+
+        .json-key { color: #38edf8; }
+        .json-string { color: #f1fa8c; }
+        .json-bracket { color: #f8f8f2; }
+
+        /* Соцсети */
+        .socials {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            border-color: var(--accent-color);
+            background: var(--accent-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .music-wrapper {
+            margin-top: 10px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Экран входа -->
+    <div id="entry-screen" onclick="enterSite()">
+        <div class="enter-text">[ click to enter ]</div>
+    </div>
+
+    <!-- Основной сайт -->
+    <div id="main-content">
+        <div class="header">alesha888</div>
+
+        <div class="terminal-card">
+            <div class="terminal-header">
+                <div class="dots">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-title">~/portfolio/profile.json</div>
+            </div>
+            <div class="terminal-body">
+                <span class="json-bracket">{</span><br>
+                &nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-string">"alesha888"</span>,<br>
+                &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"Full-stack & UI Dev"</span>,<br>
+                &nbsp;&nbsp;<span class="json-key">"skills"</span>: <span class="json-bracket">[</span><span class="json-string">"JavaScript/TypeScript"</span>, <span class="json-string">"Python"</span>, <span class="json-string">"Luau"</span>, <span class="json-string">"RAGE MP"</span>, <span class="json-string">"Node.js"</span>, <span class="json-string">"UI/UX"</span>, <span class="json-string">"HTML/CSS"</span><span class="json-bracket">]</span><br>
+                <span class="json-bracket">}</span>
+            </div>
+        </div>
+
+        <div class="socials">
+            <a href="https://t.me/your_telegram" target="_blank" class="social-btn">Telegram</a>
+            <a href="https://discord.com" target="_blank" class="social-btn">Discord</a>
+            <a href="https://tiktok.com" target="_blank" class="social-btn">TikTok</a>
+            <a href="https://youtube.com" target="_blank" class="social-btn">YouTube</a>
+        </div>
+
+        <div class="music-wrapper" id="player-container">
+            <!-- Сюда подгрузится плеер при клике -->
+        </div>
+    </div>
+
+    <script>
+        function enterSite() {
+            var screen = document.getElementById('entry-screen');
+            screen.style.opacity = '0';
+            setTimeout(function() {
+                screen.style.display = 'none';
+            }, 500);
+
+            // Вставляем плеер с включенным автозапуском
+            var container = document.getElementById('player-container');
+            container.innerHTML = '<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/royalxvii/slezy-satoshi&color=%23ff3344&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>';
+        }
+    </script>
+</body>
+</html>
