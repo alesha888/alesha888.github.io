@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>alesha888 — Portfolio</title>
+    <title>alesha — Developer Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -31,6 +31,7 @@
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
+            padding: 40px 20px;
         }
 
         /* Экран входа [ click to enter ] */
@@ -62,20 +63,63 @@
             50% { opacity: 1; }
         }
 
-        /* Основной контент */
+        /* Основной контейнер */
         #main-content {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 40px 20px;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 24px;
         }
 
-        .header {
-            font-size: 1.8rem;
+        /* Шапка сайта */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logo {
+            font-size: 1.6rem;
             font-weight: 800;
             letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        /* Главный двухколоночный грид */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 850px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .left-col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         /* Терминал */
@@ -129,32 +173,6 @@
         .json-string { color: #f1fa8c; }
         .json-bracket { color: #f8f8f2; }
 
-        /* Соцсети */
-        .socials {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .social-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .social-btn:hover {
-            border-color: var(--accent-color);
-            background: var(--accent-color);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
         /* Кастомный плеер */
         .custom-player {
             background: var(--card-bg);
@@ -195,14 +213,8 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: color 0.2s ease;
         }
 
-        .like-btn:hover {
-            color: #ff3344;
-        }
-
-        /* Прогресс-бар */
         .progress-container {
             display: flex;
             flex-direction: column;
@@ -234,7 +246,6 @@
             height: 12px;
             background: #fff;
             border-radius: 50%;
-            box-shadow: 0 0 8px rgba(255,255,255,0.8);
         }
 
         .time-stamps {
@@ -245,24 +256,17 @@
             color: var(--text-muted);
         }
 
-        /* Панель управления */
         .controls-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 4px;
         }
 
         .volume-control {
             display: flex;
             align-items: center;
             gap: 8px;
-            width: 120px;
-        }
-
-        .volume-icon {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            width: 100px;
         }
 
         .volume-slider {
@@ -275,7 +279,7 @@
         .main-controls {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
@@ -286,18 +290,13 @@
             border: none;
             color: #fff;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1rem;
             opacity: 0.8;
-            transition: opacity 0.2s;
-        }
-
-        .icon-btn:hover {
-            opacity: 1;
         }
 
         .play-btn {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             background: #fff;
             border-radius: 50%;
             border: none;
@@ -305,21 +304,93 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.05);
         }
 
         .play-btn svg {
             fill: #000;
-            width: 18px;
-            height: 18px;
-            margin-left: 2px;
+            width: 16px;
+            height: 16px;
         }
 
-        /* Скрытый iFrame SoundCloud для работы аудио */
+        /* Карточка профиля справа */
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .avatar-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+        }
+
+        .profile-title h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .profile-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .socials-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .social-link {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .social-link:hover {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
         #sc-iframe {
             display: none;
         }
@@ -327,95 +398,122 @@
 </head>
 <body>
 
-    <!-- Экран входа -->
     <div id="entry-screen" onclick="enterSite()">
         <div class="enter-text">[ click to enter ]</div>
     </div>
 
-    <!-- Основной сайт -->
     <div id="main-content">
-        <div class="header">alesha888</div>
-
-        <!-- Терминал -->
-        <div class="terminal-card">
-            <div class="terminal-header">
-                <div class="dots">
-                    <div class="dot red"></div>
-                    <div class="dot yellow"></div>
-                    <div class="dot green"></div>
-                </div>
-                <div class="terminal-title">~/portfolio/profile.json</div>
-            </div>
-            <div class="terminal-body">
-                <span class="json-bracket">{</span><br>
-                &nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-string">"alesha888"</span>,<br>
-                &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"Full-stack & UI Dev"</span>,<br>
-                &nbsp;&nbsp;<span class="json-key">"skills"</span>: <span class="json-bracket">[</span><span class="json-string">"JavaScript/TypeScript"</span>, <span class="json-string">"Python"</span>, <span class="json-string">"Luau"</span>, <span class="json-string">"RAGE MP"</span>, <span class="json-string">"Node.js"</span>, <span class="json-string">"UI/UX"</span>, <span class="json-string">"HTML/CSS"</span><span class="json-bracket">]</span><br>
-                <span class="json-bracket">}</span>
+        
+        <div class="site-header">
+            <div class="logo">alesha_dev_</div>
+            <div class="nav-links">
+                <a href="#">Работы</a>
+                <a href="#">Проекты</a>
+                <a href="#">Скиллы</a>
+                <a href="https://t.me/alesha8881" target="_blank">Контакт</a>
             </div>
         </div>
 
-        <!-- Кнопки соцсетей -->
-        <div class="socials">
-            <a href="https://t.me/alesha8881" target="_blank" class="social-btn">Telegram</a>
-            <a href="https://discord.com/users/trosik1" target="_blank" class="social-btn">Discord</a>
-            <a href="https://www.youtube.com/@code6111" target="_blank" class="social-btn">YouTube</a>
-        </div>
-
-        <!-- Кастомный музыкальный плеер -->
-        <div class="custom-player">
-            <div class="player-top">
-                <div class="track-info">
-                    <h2>888</h2>
-                    <p>huzzy b</p>
-                </div>
-                <div class="like-btn">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                    <span>6</span>
-                </div>
-            </div>
-
-            <!-- Шкала времени -->
-            <div class="progress-container">
-                <div class="progress-bar-bg" id="progress-bg">
-                    <div class="progress-bar-fill" id="progress-fill">
-                        <div class="progress-thumb"></div>
+        <div class="grid-container">
+            
+            <div class="left-col">
+                <div class="terminal-card">
+                    <div class="terminal-header">
+                        <div class="dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="terminal-title">~/portfolio/profile.json</div>
+                    </div>
+                    <div class="terminal-body">
+                        <span class="json-bracket">{</span><br>
+                        &nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-string">"alesha"</span>,<br>
+                        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"Full-stack & UI Dev"</span>,<br>
+                        &nbsp;&nbsp;<span class="json-key">"skills"</span>: <span class="json-bracket">[</span><span class="json-string">"JavaScript/TypeScript"</span>, <span class="json-string">"Python"</span>, <span class="json-string">"Luau"</span>, <span class="json-string">"RAGE MP"</span>, <span class="json-string">"Node.js"</span>, <span class="json-string">"UI/UX"</span>, <span class="json-string">"HTML/CSS"</span><span class="json-bracket">]</span><br>
+                        <span class="json-bracket">}</span>
                     </div>
                 </div>
-                <div class="time-stamps">
-                    <span id="curr-time">0:00</span>
-                    <span id="dur-time">1:46</span>
+
+                <div class="custom-player">
+                    <div class="player-top">
+                        <div class="track-info">
+                            <h2>888</h2>
+                            <p>иванп</p>
+                        </div>
+                        <div class="like-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            <span>6</span>
+                        </div>
+                    </div>
+
+                    <div class="progress-container">
+                        <div class="progress-bar-bg" id="progress-bg">
+                            <div class="progress-bar-fill" id="progress-fill">
+                                <div class="progress-thumb"></div>
+                            </div>
+                        </div>
+                        <div class="time-stamps">
+                            <span id="curr-time">0:00</span>
+                            <span id="dur-time">1:46</span>
+                        </div>
+                    </div>
+
+                    <div class="controls-container">
+                        <div class="volume-control">
+                            <span style="font-size:0.8rem; color:var(--text-muted);">🔊</span>
+                            <input type="range" class="volume-slider" id="volume" min="0" max="100" value="100">
+                        </div>
+
+                        <div class="main-controls">
+                            <button class="icon-btn">🔀</button>
+                            <button class="icon-btn">⏮</button>
+                            <button class="play-btn" id="play-toggle">
+                                <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </button>
+                            <button class="icon-btn">⏭</button>
+                            <button class="icon-btn">🔁</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Управление -->
-            <div class="controls-container">
-                <div class="volume-control">
-                    <span class="volume-icon">🔊</span>
-                    <input type="range" class="volume-slider" id="volume" min="0" max="100" value="100">
+            <div class="profile-card">
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=alesha888" alt="alesha" class="avatar-img">
+                
+                <div class="profile-title">
+                    <h1>alesha</h1>
+                    <p>Full-stack Developer & UI Engineer</p>
                 </div>
 
-                <div class="main-controls">
-                    <button class="icon-btn">🔀</button>
-                    <button class="icon-btn">⏮</button>
-                    <button class="play-btn" id="play-toggle">
-                        <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </button>
-                    <button class="icon-btn">⏭</button>
-                    <button class="icon-btn">🔁</button>
+                <div class="badges">
+                    <div class="badge">&lt;/&gt; Разработчик</div>
+                    <div class="badge">🎨 UI Дизайнер</div>
+                    <div class="badge">👁 88</div>
+                </div>
+
+                <div class="socials-list">
+                    <a href="https://discord.com/users/trosik1" target="_blank" class="social-link">
+                        Discord: trosik1
+                    </a>
+                    <a href="https://t.me/alesha8881" target="_blank" class="social-link">
+                        Telegram: @alesha8881
+                    </a>
+                    <a href="https://www.youtube.com/@code6111" target="_blank" class="social-link">
+                        YouTube: @code6111
+                    </a>
                 </div>
             </div>
+
         </div>
 
     </div>
 
-    <!-- Скрытый SoundCloud плеер -->
     <iframe id="sc-iframe" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/royalxvii/slezy-satoshi"></iframe>
 
     <script>
         const iframe = document.getElementById('sc-iframe');
         const widget = SC.Widget(iframe);
-        
         let isPlaying = false;
 
         const playBtn = document.getElementById('play-toggle');
@@ -443,19 +541,9 @@
             updatePlayIcon();
         }
 
-        playBtn.addEventListener('click', () => {
-            widget.toggle();
-        });
-
-        widget.bind(SC.Widget.Events.PLAY, () => {
-            isPlaying = true;
-            updatePlayIcon();
-        });
-
-        widget.bind(SC.Widget.Events.PAUSE, () => {
-            isPlaying = false;
-            updatePlayIcon();
-        });
+        playBtn.addEventListener('click', () => { widget.toggle(); });
+        widget.bind(SC.Widget.Events.PLAY, () => { isPlaying = true; updatePlayIcon(); });
+        widget.bind(SC.Widget.Events.PAUSE, () => { isPlaying = false; updatePlayIcon(); });
 
         widget.bind(SC.Widget.Events.PLAY_PROGRESS, (data) => {
             currTimeEl.innerText = formatTime(data.currentPosition);
@@ -469,16 +557,12 @@
         progressBg.addEventListener('click', (e) => {
             const rect = progressBg.getBoundingClientRect();
             const clickX = e.clientX - rect.left;
-            const width = rect.width;
             widget.getDuration((duration) => {
-                const seekTo = (clickX / width) * duration;
-                widget.seekTo(seekTo);
+                widget.seekTo((clickX / rect.width) * duration);
             });
         });
 
-        volumeSlider.addEventListener('input', (e) => {
-            widget.setVolume(e.target.value);
-        });
+        volumeSlider.addEventListener('input', (e) => { widget.setVolume(e.target.value); });
 
         function updatePlayIcon() {
             if (isPlaying) {
