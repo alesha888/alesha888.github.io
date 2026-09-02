@@ -3,328 +3,300 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>alesha888_</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>alesha888 — Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #0a0a0c;
+            --card-bg: rgba(18, 18, 22, 0.75);
+            --accent-color: #ff3344;
+            --accent-glow: rgba(255, 51, 68, 0.35);
+            --text-main: #f1f1f5;
+            --text-muted: #8a8a9e;
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            background-color: #08080a;
-            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
             overflow-x: hidden;
+            padding: 40px 20px;
+            background-image: 
+                radial-gradient(circle at 50% 0%, var(--accent-glow) 0%, transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);
         }
 
-        html, body, a, button, input {
-            cursor: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='5' fill='%239CA3AF' stroke='%234B5563' stroke-width='2'/%3E%3C/svg%3E") 8 8, auto !important;
-        }
-        
-        .card-dark {
-            background-color: #0d0e12;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-        }
-
-        .card-dark-header {
-            background-color: #121318;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #a855f7;
-            cursor: pointer;
-        }
-
+        /* Фоновый блюр */
         .glow-bg {
-            position: absolute;
-            top: 0;
+            position: fixed;
+            top: -100px;
             left: 50%;
             transform: translateX(-50%);
-            width: 1000px;
-            height: 500px;
-            background: radial-gradient(ellipse at top, rgba(147, 51, 234, 0.15) 0%, rgba(8, 8, 10, 0) 70%);
+            width: 600px;
+            height: 300px;
+            background: var(--accent-color);
+            filter: blur(140px);
+            opacity: 0.15;
             pointer-events: none;
             z-index: 0;
         }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Шапка / Профиль */
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 84px;
+            height: 84px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 16px;
+            height: 16px;
+            background-color: #22c55e;
+            border: 3px solid var(--bg-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .profile-info h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #fff;
+        }
+
+        .profile-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Соцсети */
+        .socials {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .social-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-btn:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--accent-glow);
+        }
+
+        /* Плеер SoundCloud */
+        .music-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: fadeIn 1s ease-out;
+            overflow: hidden;
+        }
+
+        .music-card-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .music-card-title::before {
+            content: '♪';
+            color: var(--accent-color);
+            font-size: 1rem;
+        }
+
+        .player-wrapper {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Плашки / Теги */
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Анимации */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 600px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .socials {
+                justify-content: center;
+            }
+        }
     </style>
 </head>
-<body class="min-h-screen relative flex flex-col items-center justify-start pb-24">
+<body>
 
     <div class="glow-bg"></div>
 
-    <div id="enter-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#08080a] transition-all duration-500 cursor-pointer select-none">
-        <h1 class="text-2xl font-bold tracking-tight text-white mb-2 pointer-events-none">alesha888_</h1>
-        <p class="text-xs text-purple-400 font-mono tracking-wider pointer-events-none">[ Click anywhere to enter ]</p>
-    </div>
-
-    <header class="w-full max-w-5xl px-6 py-8 flex justify-between items-center z-10">
-        <div class="font-extrabold text-xl tracking-tight text-white flex items-center gap-1">
-            alesha888<span class="text-purple-500">_</span>
-        </div>
-        <nav class="flex space-x-8 text-xs font-medium text-gray-400">
-            <a href="#about" class="hover:text-white transition">Профиль</a>
-            <a href="#projects" class="hover:text-white transition">Проекты</a>
-            <a href="#skills" class="hover:text-white transition">Скиллы</a>
-            <a href="#contact" class="hover:text-white transition">Контакт</a>
-        </nav>
-    </header>
-
-    <div class="w-full max-w-5xl px-6 space-y-16 z-10 mt-2">
+    <div class="container">
         
-        <main id="about" class="grid grid-cols-1 md:grid-cols-12 gap-5">
-            
-            <div class="md:col-span-7 flex flex-col gap-5">
-                
-                <div class="card-dark overflow-hidden flex flex-col h-[230px]">
-                    <div class="card-dark-header px-4 py-2.5 flex items-center justify-between">
-                        <div class="flex items-center space-x-2">
-                            <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
-                            <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
-                            <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
-                        </div>
-                        <span class="text-xs font-mono text-gray-500">~/portfolio/profile.json</span>
-                    </div>
-                    <div class="p-4 font-mono text-xs text-gray-400 space-y-1 overflow-y-auto">
-                        <p><span class="text-gray-600">1</span>  {</p>
-                        <p><span class="text-gray-600">2</span>    <span class="text-purple-400">"nickname"</span>: <span class="text-emerald-400">"alesha888"</span>,</p>
-                        <p><span class="text-gray-600">3</span>    <span class="text-purple-400">"discord"</span>: <span class="text-emerald-400">"trosik1"</span>,</p>
-                        <p><span class="text-gray-600">4</span>    <span class="text-purple-400">"role"</span>: <span class="text-emerald-400">"Developer & Game Server Dev"</span>,</p>
-                        <p><span class="text-gray-600">5</span>    <span class="text-purple-400">"status"</span>: <span class="text-emerald-400">"Coding & Server Host"</span>,</p>
-                        <p><span class="text-gray-600">6</span>    <span class="text-purple-400">"focus"</span>: <span class="text-emerald-400">"JS / Node.js / Databases"</span></p>
-                        <p><span class="text-gray-600">7</span>  }</p>
-                    </div>
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="avatar-container">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=alesha888" alt="alesha888" class="avatar">
+                    <div class="status-badge"></div>
                 </div>
-
-                <div class="card-dark p-5 flex flex-col justify-between h-[210px]">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-sm font-bold text-white tracking-wide">uv1lmpvec5ki</h3>
-                            <p class="text-xs text-purple-400 font-medium mt-0.5">facehateyou</p>
-                        </div>
-                        <div class="flex items-center space-x-1.5 text-xs text-gray-400 bg-white/5 px-2.5 py-1 rounded-full border border-white/5">
-                            <i data-lucide="heart" class="w-3.5 h-3.5 text-purple-400"></i>
-                            <span>6</span>
-                        </div>
-                    </div>
-
-                    <iframe id="sc-widget" class="hidden" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2006798099&auto_play=false" allow="autoplay"></iframe>
-
-                    <div class="space-y-1.5">
-                        <input type="range" id="seek-slider" max="100" value="0" class="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-purple-500">
-                        <div class="flex justify-between text-[11px] font-mono text-gray-500">
-                            <span id="curr-time">0:00</span>
-                            <span id="dur-time">0:00</span>
-                        </div>
-                    </div>
-
-                    <div class="flex items-center justify-between pt-1">
-                        <div class="flex items-center space-x-2 text-gray-400">
-                            <i data-lucide="volume-2" class="w-4 h-4 text-purple-400"></i>
-                            <input type="range" id="volume-slider" min="0" max="100" value="70" class="w-20 h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-purple-500">
-                        </div>
-
-                        <button id="play-btn" class="px-5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-medium text-xs transition shadow-lg shadow-purple-900/30">
-                            Play
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="md:col-span-5 flex flex-col gap-5">
-                
-                <div class="card-dark p-6 flex flex-col justify-between h-[310px] relative overflow-hidden">
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="relative">
-                                <div class="w-16 h-16 rounded-2xl overflow-hidden border border-white/10 shadow-lg">
-                                    <img src="https://assets.discordapp.com/avatars/1010185984627068948/a_7924765796b343831df0d99bcad740d0.png" alt="Avatar" class="w-full h-full object-cover">
-                                </div>
-                                <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-[#0d0e12]"></span>
-                            </div>
-                            <span class="text-xs font-mono text-purple-400 bg-purple-950/40 px-3 py-1 rounded-full border border-purple-800/40">DS: trosik1</span>
-                        </div>
-
-                        <h2 class="text-2xl font-black text-white tracking-tight">alesha888</h2>
-                        <p class="text-xs text-gray-400 font-medium mt-1">Developer & Game Server Dev</p>
-
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-gray-300">RAGE MP API</span>
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-gray-300">Node.js</span>
-                            <span class="text-xs font-medium px-2.5 py-1 rounded-md bg-white/5 border border-white/5 text-gray-300">MySQL / MariaDB</span>
-                        </div>
-                    </div>
-
-                    <div class="space-y-2 mt-4" id="contact">
-                        <div class="grid grid-cols-3 gap-2">
-                            <a href="https://discord.com/users/trosik1" target="_blank" class="flex items-center justify-center py-2 px-3 rounded-lg bg-white/5 hover:bg-purple-600/20 border border-white/5 hover:border-purple-500/50 text-white transition font-medium text-xs">
-                                Discord
-                            </a>
-                            <a href="https://t.me/alesha8881" target="_blank" class="flex items-center justify-center py-2 px-3 rounded-lg bg-white/5 hover:bg-purple-600/20 border border-white/5 hover:border-purple-500/50 text-white transition font-medium text-xs">
-                                Telegram
-                            </a>
-                            <a href="https://github.com/alesha888" target="_blank" class="flex items-center justify-center py-2 px-3 rounded-lg bg-white/5 hover:bg-purple-600/20 border border-white/5 hover:border-purple-500/50 text-white transition font-medium text-xs">
-                                GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-dark p-5 h-[130px] flex flex-col justify-between">
-                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest font-mono">АКТИВНОСТЬ</span>
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-white/5 border border-white/5 flex items-center justify-center text-gray-400">
-                            <i data-lucide="terminal" class="w-4 h-4 text-purple-400"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm font-semibold text-white">Online</p>
-                            <p class="text-xs text-gray-500">System status: ready</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </main>
-
-        <section id="projects" class="space-y-6">
-            <span class="text-[10px] font-bold text-purple-400 uppercase tracking-widest font-mono">FEATURED WORK</span>
-            <h2 class="text-2xl font-extrabold text-white tracking-tight">Проекты & Сервера</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="card-dark p-5 space-y-2 hover:border-purple-500/30 transition">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-base font-bold text-white">RAGE MP Server</h3>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/50 text-purple-300 border border-purple-800/50">Server</span>
-                    </div>
-                    <p class="text-xs text-gray-400">Разработка и настройка серверных скриптов Node.js и базы данных MySQL.</p>
-                </div>
-
-                <div class="card-dark p-5 space-y-2 hover:border-purple-500/30 transition">
-                    <div class="flex justify-between items-center">
-                        <h3 class="text-base font-bold text-white">Discord Bots & Community</h3>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/50 text-purple-300 border border-purple-800/50">Discord</span>
-                    </div>
-                    <p class="text-xs text-gray-400">Кастомные Discord-боты, интеграции и оформление сообществ.</p>
+                <div class="profile-info">
+                    <h1>alesha888</h1>
+                    <p>Developer & Content Creator</p>
                 </div>
             </div>
-        </section>
 
-        <section id="skills" class="space-y-6">
-            <span class="text-[10px] font-bold text-purple-400 uppercase tracking-widest font-mono">TECH STACK</span>
-            
-            <div class="flex flex-wrap gap-2.5">
-                <span class="px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-xs text-gray-300">JavaScript</span>
-                <span class="px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-xs text-gray-300">Node.js</span>
-                <span class="px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-xs text-gray-300">MySQL / MariaDB</span>
-                <span class="px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-xs text-gray-300">RAGE MP API</span>
-                <span class="px-4 py-2 rounded-xl bg-white/5 border border-white/5 text-xs text-gray-300">HTML / CSS / Tailwind</span>
+            <div class="tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">RAGE MP</span>
+                <span class="tag">MySQL</span>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
-                <div class="card-dark p-6 flex flex-col justify-center items-center h-28">
-                    <p class="text-2xl font-black text-purple-400 tracking-tight">20+</p>
-                    <p class="text-[10px] font-bold text-gray-500 uppercase tracking-wider font-mono mt-1">Сделанных проектов</p>
-                </div>
-                <div class="card-dark p-6 flex flex-col justify-center items-center h-28">
-                    <p class="text-2xl font-black text-purple-400 tracking-tight">3+</p>
-                    <p class="text-[10px] font-bold text-gray-500 uppercase tracking-wider font-mono mt-1">Года опыта</p>
-                </div>
-                <div class="card-dark p-6 flex flex-col justify-center items-center h-28">
-                    <p class="text-2xl font-black text-purple-400 tracking-tight">100%</p>
-                    <p class="text-[10px] font-bold text-gray-500 uppercase tracking-wider font-mono mt-1">Качество и UI</p>
-                </div>
-                <div class="card-dark p-6 flex flex-col justify-center items-center h-28">
-                    <p class="text-2xl font-black text-purple-400 tracking-tight">24/7</p>
-                    <p class="text-[10px] font-bold text-gray-500 uppercase tracking-wider font-mono mt-1">Поддержка серверов</p>
-                </div>
+            <div class="socials">
+                <a href="https://t.me/your_telegram" target="_blank" class="social-btn">Telegram</a>
+                <a href="https://discord.com" target="_blank" class="social-btn">Discord</a>
+                <a href="https://tiktok.com" target="_blank" class="social-btn">TikTok</a>
+                <a href="https://youtube.com" target="_blank" class="social-btn">YouTube</a>
             </div>
-        </section>
+        </div>
+
+        <div class="music-card">
+            <div class="music-card-title">Сейчас играет</div>
+            <div class="player-wrapper">
+                <iframe 
+                    width="100%" 
+                    height="166" 
+                    scrolling="no" 
+                    frameborder="no" 
+                    allow="autoplay" 
+                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/royalxvii/slezy-satoshi&color=%23ff3344&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+                </iframe>
+            </div>
+        </div>
 
     </div>
 
-    <script>
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
-
-        const enterScreen = document.getElementById('enter-screen');
-        const iframe = document.getElementById('sc-widget');
-        const widget = SC.Widget(iframe);
-
-        const playBtn = document.getElementById('play-btn');
-        const volumeSlider = document.getElementById('volume-slider');
-        const seekSlider = document.getElementById('seek-slider');
-        const currTimeSpan = document.getElementById('curr-time');
-        const durTimeSpan = document.getElementById('dur-time');
-
-        let duration = 0;
-        let isPlaying = false;
-
-        function formatTime(ms) {
-            const secs = Math.floor(ms / 1000);
-            const m = Math.floor(secs / 60);
-            const s = Math.floor(secs % 60);
-            return `${m}:${s < 10 ? '0' : ''}${s}`;
-        }
-
-        widget.bind(SC.Widget.Events.READY, () => {
-            widget.setVolume(70);
-            widget.getDuration((d) => {
-                duration = d;
-                durTimeSpan.innerText = formatTime(d);
-            });
-        });
-
-        enterScreen.addEventListener('click', () => {
-            enterScreen.style.opacity = '0';
-            enterScreen.style.pointerEvents = 'none';
-            setTimeout(() => enterScreen.style.display = 'none', 500);
-
-            widget.play();
-            isPlaying = true;
-            playBtn.innerText = 'Pause';
-        });
-
-        playBtn.addEventListener('click', () => {
-            widget.toggle();
-        });
-
-        widget.bind(SC.Widget.Events.PLAY, () => {
-            isPlaying = true;
-            playBtn.innerText = 'Pause';
-        });
-
-        widget.bind(SC.Widget.Events.PAUSE, () => {
-            isPlaying = false;
-            playBtn.innerText = 'Play';
-        });
-
-        widget.bind(SC.Widget.Events.PLAY_PROGRESS, (data) => {
-            if (duration > 0) {
-                seekSlider.value = (data.currentPosition / duration) * 100;
-                currTimeSpan.innerText = formatTime(data.currentPosition);
-            }
-        });
-
-        seekSlider.addEventListener('input', (e) => {
-            if (duration > 0) {
-                const seekTo = (e.target.value / 100) * duration;
-                widget.seekTo(seekTo);
-            }
-        });
-
-        volumeSlider.addEventListener('input', (e) => {
-            widget.setVolume(e.target.value);
-        });
-    </script>
 </body>
 </html>
