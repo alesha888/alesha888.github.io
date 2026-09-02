@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>alesha888 — Portfolio</title>
+    <title>alesha888 — Developer Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://w.soundcloud.com/player/api.js"></script>
     <style>
         :root {
-            --bg-color: #0a0a0c;
-            --card-bg: rgba(18, 18, 22, 0.75);
+            --bg-color: #08080a;
+            --card-bg: #0f0f12;
             --accent-color: #ff3344;
-            --accent-glow: rgba(255, 51, 68, 0.35);
             --text-main: #f1f1f5;
             --text-muted: #8a8a9e;
             --border-color: rgba(255, 255, 255, 0.08);
@@ -22,6 +22,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            user-select: none;
         }
 
         body {
@@ -29,274 +30,96 @@
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
             overflow-x: hidden;
-            padding: 40px 20px;
-            background-image: 
-                radial-gradient(circle at 50% 0%, var(--accent-glow) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 40%);
         }
 
-        /* Фоновый блюр */
-        .glow-bg {
+        /* Экран входа [ click to enter ] */
+        #entry-screen {
             position: fixed;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 300px;
-            background: var(--accent-color);
-            filter: blur(140px);
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 800px;
-            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #050505;
             display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        /* Шапка / Профиль */
-        .profile-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            animation: fadeIn 0.8s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .profile-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
-        }
-
-        .profile-header {
-            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            z-index: 9999;
+            cursor: pointer;
+            transition: opacity 0.8s ease, visibility 0.8s;
         }
 
-        .avatar-container {
-            position: relative;
-            width: 84px;
-            height: 84px;
+        .enter-text {
+            font-family: 'JetBrains Mono', monospace;
+            color: #ffffff;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            animation: pulseText 2s infinite ease-in-out;
         }
 
-        .avatar {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--border-color);
-            box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        @keyframes pulseText {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
-        .status-badge {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 16px;
-            height: 16px;
-            background-color: #22c55e;
-            border: 3px solid var(--bg-color);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
+        /* Основной контент */
+        #main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
         }
 
-        .profile-info h1 {
-            font-size: 2rem;
+        /* Шапка с логотипом */
+        .header {
+            font-size: 1.8rem;
             font-weight: 800;
             letter-spacing: -0.5px;
-            color: #fff;
         }
 
-        .profile-info p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-top: 4px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        /* Соцсети */
-        .socials {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-
-        .social-btn {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 8px 16px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .social-btn:hover {
-            background: var(--accent-color);
-            border-color: var(--accent-color);
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px var(--accent-glow);
-        }
-
-        /* Плеер SoundCloud */
-        .music-card {
+        /* Окно терминала (как на скриншоте) */
+        .terminal-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 20px;
-            backdrop-filter: blur(16px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            animation: fadeIn 1s ease-out;
-            overflow: hidden;
-        }
-
-        .music-card-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-bottom: 12px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .music-card-title::before {
-            content: '♪';
-            color: var(--accent-color);
-            font-size: 1rem;
-        }
-
-        .player-wrapper {
             border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Плашки / Теги */
-        .tags {
+        .terminal-header {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dots {
             display: flex;
             gap: 8px;
-            flex-wrap: wrap;
+            margin-right: 16px;
         }
 
-        .tag {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .terminal-title {
             font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
-        /* Анимации */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-        }
-
-        /* Адаптивность */
-        @media (max-width: 600px) {
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .socials {
-                justify-content: center;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="glow-bg"></div>
-
-    <div class="container">
-        
-        <div class="profile-card">
-            <div class="profile-header">
-                <div class="avatar-container">
-                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=alesha888" alt="alesha888" class="avatar">
-                    <div class="status-badge"></div>
-                </div>
-                <div class="profile-info">
-                    <h1>alesha888</h1>
-                    <p>Developer & Content Creator</p>
-                </div>
-            </div>
-
-            <div class="tags">
-                <span class="tag">JavaScript</span>
-                <span class="tag">Node.js</span>
-                <span class="tag">RAGE MP</span>
-                <span class="tag">MySQL</span>
-            </div>
-
-            <div class="socials">
-                <a href="https://t.me/your_telegram" target="_blank" class="social-btn">Telegram</a>
-                <a href="https://discord.com" target="_blank" class="social-btn">Discord</a>
-                <a href="https://tiktok.com" target="_blank" class="social-btn">TikTok</a>
-                <a href="https://youtube.com" target="_blank" class="social-btn">YouTube</a>
-            </div>
-        </div>
-
-        <div class="music-card">
-            <div class="music-card-title">Сейчас играет</div>
-            <div class="player-wrapper">
-                <iframe 
-                    width="100%" 
-                    height="166" 
-                    scrolling="no" 
-                    frameborder="no" 
-                    allow="autoplay" 
-                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/royalxvii/slezy-satoshi&color=%23ff3344&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
-                </iframe>
-            </div>
-        </div>
-
-    </div>
-
-</body>
-</html>
+        .terminal-body {
+            padding: 24px;
+            font-family:
